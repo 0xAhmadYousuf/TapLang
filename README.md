@@ -57,8 +57,9 @@ TapLang/
 TapLang makes keyboard automation simple and AI-friendly:
 
 ```taplang
-TYPE[Hello AI Agent]
-PRESS[CTRL] CLICK[C] RELEASE[CTRL]  # Copy
+TYPE[`Hello AI Agent`]              # Simple backticks!
+PRESS[CTRL] CLICK[C] RELEASE[CTRL]  # Copy  
+TYPE[`Dynamic: FORMAT[RANDOM[Alice,Bob,Charlie]]`]  # Random content
 SET_WAIT[RANDOM[100,500]] WAIT[]   # Random timing
 ```
 
@@ -112,6 +113,7 @@ SET_WAIT[RANDOM[100,500]] WAIT[]   # Random timing
 ## ✨ Key Features
 
 - **🤖 AI-First Design** - Built specifically for AI agents and automation
+- **🚧 Concept Barriers** - Super simple text handling with `TYPE[`text`]` syntax and `FORMAT[RANDOM[]]` support
 - **🌍 Cross-Platform** - Works consistently across operating systems  
 - **⚡ Smart Validation** - Catches errors like unfinished press operations and invalid keys
 - **🎲 Dynamic Timing** - Fixed delays or human-like random timing

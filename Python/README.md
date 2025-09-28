@@ -83,10 +83,11 @@ python examples.py
 | `CLICK[key]` | Press and release key | `CLICK[A]`, `CLICK[ENTER]` |
 | `PRESS[key]` | Press and hold key | `PRESS[SHIFT]` |
 | `RELEASE[key]` | Release held key | `RELEASE[SHIFT]` |
-| `TYPE[text]` | Type text string | `TYPE[Hello World]` |
+| `TYPE[```text```]` | Type text with concept barriers | `TYPE[```Hello```]` |
 | `WAIT[ms]` | Wait specific time | `WAIT[1000]` |
 | `WAIT[]` | Wait default/random time | `WAIT[]` |
-| `SET_WAIT[ms]` | Set default wait time | `SET_WAIT[500]` |
+| `SET_WAIT[ms]` | Set wait time or random range | `SET_WAIT[500]` |
+| `FORMAT[key]` | Dynamic content within barriers | `FORMAT[RANDOM[A,B]]` |
 | `SET_WAIT[RANDOM[min,max]]` | Set random wait range | `SET_WAIT[RANDOM[100,1000]]` |
 | `FUNCTION[n]` | Press function key Fn | `FUNCTION[1]` to `FUNCTION[12]` |
 | `PRESS_LEFT[key]` | Press left-side modifier | `PRESS_LEFT[SHIFT]` |

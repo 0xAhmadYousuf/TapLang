@@ -9,14 +9,15 @@
         "CLICK": "Press and release key",
         "PRESS": "Press and hold key",
         "RELEASE": "Release held key",
-        "TYPE": "Type text or random selection",
+        "TYPE": "Type text with concept barriers (`text` or ```complex```) and FORMAT support",
         "WAIT": "Wait milliseconds",
         "SET_WAIT": "Set wait time or random range",
         "FUNCTION": "Press function key F1-F12",
         "PRESS_LEFT": "Press left side modifier",
         "PRESS_RIGHT": "Press right side modifier",
         "ESCAPE_TYPE_START": "Begin escape sequence",
-        "ESCAPE_TYPE_END": "End escape sequence"
+        "ESCAPE_TYPE_END": "End escape sequence",
+        "FORMAT": "Format dynamic content within concept barriers"
     },
     "keys": {
         "letters": [
@@ -144,17 +145,24 @@
         "press_release": "Every PRESS, PRESS_LEFT, or PRESS_RIGHT must have matching RELEASE",
         "case_insensitive": "All instructions and keys are case-insensitive",
         "escape_sequence": "Use ESCAPE_TYPE_START and ESCAPE_TYPE_END for text with keywords",
-        "type_random": "TYPE supports RANDOM[option1,option2,option3] for random text selection"
+        "type_random": "TYPE supports RANDOM[option1,option2,option3] for random text selection",
+        "concept_barrier": "TYPE text must be enclosed in triple backticks ```text```",
+        "barrier_emergency": "Use more than 3 backticks if text contains ``` (e.g., ````text with ``` inside````)",
+        "format_key": "Use FORMAT key for dynamic content: TYPE[```Hello FORMAT[RANDOM[1,2]] World```]",
+        "barrier_validation": "Invalid barrier formats raise syntax errors"
     },
     "examples": {
-        "basic": "TYPE[Hello] CLICK[SPACE] TYPE[World]",
+        "basic": "TYPE[`Hello`] CLICK[SPACE] TYPE[`World`]",
         "function": "FUNCTION[1] FUNCTION[12]",
         "modifier": "PRESS_LEFT[SHIFT] CLICK[A] RELEASE[SHIFT]",
         "symbols": "CLICK[!] CLICK[@] CLICK[#]",
         "escape": "ESCAPE_TYPE_START[Text with PRESS[SHIFT] and CLICK[A] keywords] ESCAPE_TYPE_END[~]",
         "press_rule": "PRESS[CTRL] CLICK[C] RELEASE[CTRL]",
-        "set_wait_fixed": "SET_WAIT[500] WAIT[] WAIT[] TYPE[Done]",
-        "set_wait_random": "SET_WAIT[RANDOM[100,1000]] WAIT[] WAIT[] TYPE[Random delays]",
-        "type_random": "TYPE[RANDOM[Hello,Hi,Hey]] WAIT[500] TYPE[RANDOM[World,Universe,Earth]]"
+        "set_wait_fixed": "SET_WAIT[500] WAIT[] WAIT[] TYPE[`Done`]",
+        "set_wait_random": "SET_WAIT[RANDOM[100,1000]] WAIT[] WAIT[] TYPE[`Random delays`]",
+        "type_random": "TYPE[`FORMAT[RANDOM[Hello,Hi,Hey]]`] WAIT[500] TYPE[`FORMAT[RANDOM[World,Universe,Earth]]`]",
+        "concept_barrier": "TYPE[`Simple text`] TYPE[`Text with FORMAT[RANDOM[1,2,3]]`]",
+        "barrier_emergency": "TYPE[```Text with ` backticks```]",
+        "format_complex": "TYPE[`Hello FORMAT[RANDOM[Alice,Bob]] your number is FORMAT[RANDOM[1,2,3,4,5]]`]"
     }
 }

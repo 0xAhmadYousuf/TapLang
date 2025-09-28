@@ -20,14 +20,29 @@ def validate_instruction(parsed):
         if not param:
             raise ValueError("TYPE requires text parameter")
         
-        # Check for RANDOM[option1,option2,option3] format
-        if param.upper().startswith('RANDOM[') and param.endswith(']'):
-            options_part = param[7:-1]  # Extract "option1,option2,option3"
-            if not options_part:
-                raise ValueError("RANDOM requires at least one option")
-            options = [opt.strip() for opt in options_part.split(',')]
-            if len(options) < 1:
-                raise ValueError("RANDOM requires at least one option")
+        # Require concept barrier format
+        if 'barrier_info' not in parsed:
+            raise ValueError("TYPE requires concept barrier format: TYPE[`text`] (use backticks)")
+        
+        barrier_info = parsed['barrier_info']
+        format_keys = parsed.get('format_keys', [])
+        
+        # Validate barrier format was parsed correctly
+        if not barrier_info:
+            raise ValueError("TYPE with concept barriers requires valid ```text``` format")
+        
+        # Validate FORMAT keys
+        for format_key in format_keys:
+            format_content = format_key['content']
+            
+            # Validate RANDOM within FORMAT
+            if format_content.upper().startswith('RANDOM[') and format_content.endswith(']'):
+                options_part = format_content[7:-1]
+                if not options_part:
+                    raise ValueError("FORMAT[RANDOM[]] requires at least one option")
+                options = [opt.strip() for opt in options_part.split(',')]
+                if len(options) < 1:
+                    raise ValueError("FORMAT[RANDOM[]] requires at least one option")
     
     elif cmd == 'WAIT':
         if param:  # WAIT[ms] - specific time

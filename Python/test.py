@@ -42,15 +42,21 @@ Commands:
 
 def show_examples():
     examples = [
-        ("Basic typing", "TYPE[Hello] CLICK[SPACE] TYPE[World]"),
+        ("Basic concept barriers", "TYPE[`Hello`] CLICK[SPACE] TYPE[`World`]"),
+        ("FORMAT with RANDOM", "TYPE[`Hello FORMAT[RANDOM[Alice,Bob,Charlie]]`]"),
         ("Copy shortcut", "PRESS[CTRL] CLICK[C] RELEASE[CTRL]"),
         ("Function keys", "FUNCTION[1] WAIT[500] FUNCTION[12]"),
         ("Left shift", "PRESS_LEFT[SHIFT] CLICK[A] RELEASE[SHIFT]"),
         ("Multiple symbols", "CLICK[!] CLICK[@] CLICK[#] CLICK[$]"),
-        ("With delays", "TYPE[Username] WAIT[1000] CLICK[TAB] TYPE[Password]"),
+        ("With delays", "TYPE[`Username`] WAIT[1000] CLICK[TAB] TYPE[`Password`]"),
         ("Escape sequence", "ESCAPE_TYPE_START[This has PRESS[X] keywords] ESCAPE_TYPE_END[~]"),
         ("Navigation", "CLICK[HOME] PRESS[SHIFT] CLICK[END] RELEASE[SHIFT]"),
         ("Arrow keys", "CLICK[UP] CLICK[UP] CLICK[DOWN] CLICK[LEFT] CLICK[RIGHT]"),
+        ("Missing concept barriers", 'TYPE[Hello World]'),
+        ("Mismatched barriers", 'TYPE[`Hello World``]'),
+        ("Emergency case needed", 'TYPE[`Text with ` backticks`]'),
+        ("Empty RANDOM", 'TYPE[`FORMAT[RANDOM[]]`]'),
+        ("Complex FORMAT", "TYPE[`Number FORMAT[RANDOM[1,2,3]] and letter FORMAT[RANDOM[A,B,C]]`]"),
     ]
     
     print("\nExample TapLang Codes:")
@@ -118,15 +124,17 @@ def test_mode():
     
     # Valid tests
     valid_tests = [
-        "TYPE[Hello World]",
+        "TYPE[`Hello World`]",
         "CLICK[A] CLICK[B] CLICK[C]",
         "PRESS[SHIFT] CLICK[A] RELEASE[SHIFT]", 
         "FUNCTION[1] WAIT[1000] FUNCTION[12]",
         "PRESS_LEFT[CTRL] CLICK[C] RELEASE[CTRL]",
         "CLICK[!] CLICK[@] CLICK[#]",
-        "TYPE[Test] CLICK[TAB] TYPE[Password] CLICK[ENTER]",
+        "TYPE[`Test`] CLICK[TAB] TYPE[`Password`] CLICK[ENTER]",
         "ESCAPE_TYPE_START[Text with PRESS[X]] ESCAPE_TYPE_END[~]",
-        "CLICK[HOME] CLICK[END] CLICK[UP] CLICK[DOWN]"
+        "CLICK[HOME] CLICK[END] CLICK[UP] CLICK[DOWN]",
+        "TYPE[`Hello FORMAT[RANDOM[Alice,Bob]]`]",
+        "TYPE[```Text with ` backticks```]"
     ]
     
     # Invalid tests (should fail)
@@ -139,7 +147,12 @@ def test_mode():
         ("FUNCTION[13]", "Invalid function key"),
         ("WAIT[-100]", "Negative wait time"),
         ("ESCAPE_TYPE_START[text]", "Unfinished escape"),
-        ("PRESS[A] PRESS[A]", "Double press same key")
+        ("PRESS[A] PRESS[A]", "Double press same key"),
+        ("TYPE[Hello World]", "Missing concept barriers"),
+        ("TYPE[``Hello``]", "Invalid barrier length"),
+        ("TYPE[```Hello``]", "Mismatched barriers"),
+        ("TYPE[```Text with ``` backticks```]", "Need emergency barrier"),
+        ("TYPE[```FORMAT[RANDOM[]]```]", "Empty RANDOM in FORMAT")
     ]
     
     print("\n🟢 VALID CODE TESTS:")
