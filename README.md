@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="TapLang Logo" width="70%">
+  <img src="assets/logo.jpg" alt="TapLang Logo" width="70%">
 </p>
 
 # TapLang - Keyboard Action Language
